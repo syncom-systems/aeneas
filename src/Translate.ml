@@ -1371,8 +1371,14 @@ let extract_file (config : gen_config) (ctx : gen_ctx) (fi : extract_file_info)
       List.iter (fun m -> Printf.fprintf out "import %s\n" m) fi.custom_imports;
       (* Add the custom includes *)
       List.iter (fun m -> Printf.fprintf out "import %s\n" m) fi.custom_includes;
-      (* Always open the Primitives namespace *)
-      Printf.fprintf out "open Aeneas Aeneas.Std Result ControlFlow Error\n";
+      (* Always open the Primitives namespace.
+
+         The clause comes from `Correspondence.lean_opened_namespaces` rather
+         than a literal here: every exported correspondence's canonical name is
+         built from the same list, and a literal in this emitter plus a
+         separate `Aeneas.Std` in the exporter would be two copies of one fact
+         about which namespaces are in scope. *)
+      Printf.fprintf out "%s\n" (Correspondence.lean_header_open_clause ());
       (* Silence the linters which would fire on generated code. *)
       List.iter
         (fun option -> Printf.fprintf out "set_option %s false\n" option)
