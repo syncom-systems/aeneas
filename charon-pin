@@ -1,2 +1,2 @@
-# This is the commit from https://github.com/AeneasVerif/charon that should be used with this version of aeneas.
-b82d2748c1e5bfd9519cd9401f9186d33b44a7f1
+# This is the commit from https://github.com/syncom-systems/charon (upstream AeneasVerif/charon b82d274 plus the compilation-semantics export) that should be used with this version of aeneas.
+05d450b7af546c28039482375079c17f9a9abcc4
